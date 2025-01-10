@@ -38,10 +38,11 @@ The GUI should open with the card game interface.
 
 
 ## Key Features
-Draw Cards: Click the Draw Card button to draw cards from the pool and add them to the deck.
-Assign Cards to Body Parts: Cards can be assigned to Head, Arms, Legs, Body, or Internal Organs by clicking the respective buttons.
-View Card Effects: Each card has an associated effect, which you can view, modify, and save.
-Save Card Effects: You can modify and save the effects of the cards assigned to body parts.
-Notes
-Ensure that Visual Studio is up to date and has the required extensions for Git integration.
-If you encounter any errors related to missing packages, you may need to manually restore NuGet packages using the NuGet Package Manager.
+- Draw Cards: Click the Draw Card button to draw cards from the pool and add them to the deck.
+- Assign Cards to Body Parts: Cards can be assigned to Head, Arms, Legs, Body, or Internal Organs by clicking the respective buttons.
+- View Card Effects: Each card has an associated effect, which you can view, modify, and save.
+- Save Card Effects: You can modify and save the effects of the cards assigned to body parts.
+
+## Notes
+- Ensure that Visual Studio is up to date and has the required extensions for Git integration.
+- If you encounter any errors related to missing packages, you may need to manually restore NuGet packages using the NuGet Package Manager.
