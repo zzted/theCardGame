@@ -1,0 +1,17 @@
+E:\theCardGame\theCardGame\theCardGameDemo\bin\Debug\net8.0-windows\theCardGameDemo.exe
+E:\theCardGame\theCardGame\theCardGameDemo\bin\Debug\net8.0-windows\theCardGameDemo.deps.json
+E:\theCardGame\theCardGame\theCardGameDemo\bin\Debug\net8.0-windows\theCardGameDemo.runtimeconfig.json
+E:\theCardGame\theCardGame\theCardGameDemo\bin\Debug\net8.0-windows\theCardGameDemo.dll
+E:\theCardGame\theCardGame\theCardGameDemo\bin\Debug\net8.0-windows\theCardGameDemo.pdb
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.csproj.GenerateResource.cache
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.GeneratedMSBuildEditorConfig.editorconfig
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.AssemblyInfoInputs.cache
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.AssemblyInfo.cs
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.csproj.CoreCompileInputs.cache
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.sourcelink.json
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.dll
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\refint\theCardGameDemo.dll
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.pdb
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.genruntimeconfig.cache
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\ref\theCardGameDemo.dll
+E:\theCardGame\theCardGame\theCardGameDemo\obj\Debug\net8.0-windows\theCardGameDemo.MainForm.resources
