@@ -23,9 +23,14 @@
             Cards.Remove(card);
         }
 
+        public void ClearCard()
+        {
+            Cards.Clear();
+        }
+
         public void CalculateExperience()
         {
-            ExperiencePoints = Cards.Count;
+            ExperiencePoints += Cards.Count * 2;
         }
     }
 }

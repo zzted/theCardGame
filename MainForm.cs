@@ -7,37 +7,27 @@ namespace theCardGameDemo
 {
     public partial class MainForm : Form
     {
-        private List<int> cardPool;
         private List<Card> deck;
         private BodyPart[] bodyParts;  // Reference to BodyPart class
         private int selectedCardIndex = -1; // Keep track of the selected card in the deck
+        private int roundNumber = 0;
+        private bool _ignoreSelectionChanged = false;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeCardPoolAndDeck();
+            InitializeDeck();
             InitializeBodyParts();
         }
 
-        private void InitializeCardPoolAndDeck()
+        private void InitializeDeck()
         {
-            cardPool = new List<int>();
             deck = new List<Card>
             {
                 new Card(171), new Card(171), new Card(172), new Card(172),
                 new Card(173), new Card(173), new Card(174), new Card(174),
                 new Card(175), new Card(176), new Card(177), new Card(177)
             };
-
-            for (int i = 1; i <= 180; i++)
-            {
-                cardPool.Add(i);
-            }
-
-            for (int i = 201; i <= 230; i++)
-            {
-                cardPool.Add(i);
-            }
 
             UpdateDeckDisplay();
         }
@@ -66,6 +56,7 @@ namespace theCardGameDemo
         // This method will be called when a card in the deck is clicked
         private void lbDeck_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbDeck);
             // Ensure that the selected index is not -1 (nothing is selected)
             if (lbDeck.SelectedIndex != -1)
             {
@@ -75,20 +66,25 @@ namespace theCardGameDemo
             }
         }
 
+        private int GetRandomCard()
+        {
+            Random random = new Random();
+            int chance = random.Next(1, 101); // Generate a number between 1 and 100
+
+            if (chance <= 90) // 90% chance for numbers 1 to 170
+            {
+                return random.Next(1, 171); // Get a number between 1 and 170
+            }
+            else // 10% chance for numbers 201 to 230
+            {
+                return random.Next(201, 231); // Get a number between 201 and 230
+            }
+        }
+
         private void btnDrawCard_Click(object sender, EventArgs e)
         {
-            if (cardPool.Count == 0)
-            {
-                MessageBox.Show("No cards left in the pool.");
-                return;
-            }
-
-            Random random = new Random();
-            int randomIndex = random.Next(cardPool.Count);
-
-            int drawnCard = cardPool[randomIndex];
-            cardPool.RemoveAt(randomIndex);
-            deck.Add(new Card(drawnCard));
+            
+            deck.Add(new Card(GetRandomCard()));
 
             UpdateDeckDisplay();
         }
@@ -103,7 +99,6 @@ namespace theCardGameDemo
                 deck.RemoveAt(selectedCardIndex);
                 UpdateDeckDisplay();
                 UpdateBodyPartsDisplay();
-                MessageBox.Show($"Card {selectedCard.CardNumber} added to Head.");
             }
         }
 
@@ -117,7 +112,6 @@ namespace theCardGameDemo
                 deck.RemoveAt(selectedCardIndex);
                 UpdateDeckDisplay();
                 UpdateBodyPartsDisplay();
-                MessageBox.Show($"Card {selectedCard} added to Arms.");
             }
         }
 
@@ -131,7 +125,6 @@ namespace theCardGameDemo
                 deck.RemoveAt(selectedCardIndex);
                 UpdateDeckDisplay();
                 UpdateBodyPartsDisplay();
-                MessageBox.Show($"Card {selectedCard} added to Legs.");
             }
         }
 
@@ -145,7 +138,6 @@ namespace theCardGameDemo
                 deck.RemoveAt(selectedCardIndex);
                 UpdateDeckDisplay();
                 UpdateBodyPartsDisplay();
-                MessageBox.Show($"Card {selectedCard} added to Body.");
             }
         }
 
@@ -159,7 +151,6 @@ namespace theCardGameDemo
                 deck.RemoveAt(selectedCardIndex);
                 UpdateDeckDisplay();
                 UpdateBodyPartsDisplay();
-                MessageBox.Show($"Card {selectedCard} added to Internal Organs.");
             }
         }
 
@@ -203,13 +194,13 @@ namespace theCardGameDemo
             {
                 var selectedCard = deck[selectedCardIndex];
                 selectedCard.Effect = txtCardEffect.Text;
-                MessageBox.Show("Card effect saved successfully!");
             }
         }
 
         // When a card in the Head body part is clicked
         private void lbBodyPartHead_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbBodyPartHead);
             if (lbBodyPartHead.SelectedIndex != -1)
             {
                 selectedCardIndex = lbBodyPartHead.SelectedIndex;
@@ -221,9 +212,10 @@ namespace theCardGameDemo
             }
         }
 
-        // Similar handlers for other body parts (Arms, Legs, Body, Internal Organs)
+        // When a card in the Arms body part is clicked
         private void lbBodyPartArms_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbBodyPartArms);
             if (lbBodyPartArms.SelectedIndex != -1)
             {
                 selectedCardIndex = lbBodyPartArms.SelectedIndex;
@@ -240,6 +232,7 @@ namespace theCardGameDemo
         // When a card in the Legs body part is clicked
         private void lbBodyPartLegs_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbBodyPartLegs);
             if (lbBodyPartLegs.SelectedIndex != -1)
             {
                 selectedCardIndex = lbBodyPartLegs.SelectedIndex;
@@ -254,6 +247,7 @@ namespace theCardGameDemo
         // When a card in the Body part is clicked
         private void lbBodyPartBody_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbBodyPartBody);
             if (lbBodyPartBody.SelectedIndex != -1)
             {
                 selectedCardIndex = lbBodyPartBody.SelectedIndex;
@@ -265,9 +259,10 @@ namespace theCardGameDemo
             }
         }
 
-        // When a card in the Internal Organs body part is clicked
+        // When a card in the Organs body part is clicked
         private void lbBodyPartOrgans_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeselectOtherListBoxes(lbBodyPartOrgans);
             if (lbBodyPartOrgans.SelectedIndex != -1)
             {
                 selectedCardIndex = lbBodyPartOrgans.SelectedIndex;
@@ -277,6 +272,87 @@ namespace theCardGameDemo
                     txtCardEffect.Text = selectedCard.Effect;
                 }
             }
+        }
+
+        private void DeselectOtherListBoxes(ListBox selectedListBox)
+        {
+            if (_ignoreSelectionChanged)
+                return;
+
+            _ignoreSelectionChanged = true;
+
+            // Iterate through all the controls in the form
+            foreach (var control in this.Controls)
+            {
+                // Check if the control is a ListBox
+                if (control is ListBox listBox && listBox != selectedListBox)
+                {
+                    // Deselect the items in the other list boxes
+                    listBox.ClearSelected();
+                }
+            }
+
+            _ignoreSelectionChanged = false;
+        }
+
+        private void btnEndRound_Click(object sender, EventArgs e)
+        {
+            // Calculate experience for each body part
+            foreach (var bodyPart in bodyParts)
+            {
+                bodyPart.CalculateExperience();
+                bodyPart.ClearCard();
+            }
+
+            // Update the experience display for each body part (assuming labels for each body part's experience)
+            lblHeadExperience.Text = $"EXP: {bodyParts[0].ExperiencePoints}";
+            lblArmsExperience.Text = $"EXP: {bodyParts[1].ExperiencePoints}";
+            lblLegsExperience.Text = $"EXP: {bodyParts[2].ExperiencePoints}";
+            lblBodyExperience.Text = $"EXP: {bodyParts[3].ExperiencePoints}";
+            lblOrgansExperience.Text = $"EXP: {bodyParts[4].ExperiencePoints}";
+            lblRoundNumber.Text = $"Round# {++this.roundNumber}";
+
+            // Clear all cards from each body part
+            lbBodyPartHead.Items.Clear();
+            lbBodyPartArms.Items.Clear();
+            lbBodyPartLegs.Items.Clear();
+            lbBodyPartBody.Items.Clear();
+            lbBodyPartOrgans.Items.Clear();
+
+            // Optionally, reset the experience points or display a message
+            MessageBox.Show("Round ended! Experience calculated and cards removed.");
+        }
+
+        private void btnResetGame_Click(object sender, EventArgs e)
+        {
+            // Clear the deck
+            lbDeck.Items.Clear();
+
+            // Clear all cards from each body part list box
+            lbBodyPartHead.Items.Clear();
+            lbBodyPartArms.Items.Clear();
+            lbBodyPartLegs.Items.Clear();
+            lbBodyPartBody.Items.Clear();
+            lbBodyPartOrgans.Items.Clear();
+
+            // Reset experience points for each body part
+            this.InitializeBodyParts();
+            this.InitializeDeck();
+            this.roundNumber = 0;
+
+            // Update the experience labels
+            lblHeadExperience.Text = "EXP: 0";
+            lblArmsExperience.Text = "EXP: 0";
+            lblLegsExperience.Text = "EXP: 0";
+            lblBodyExperience.Text = "EXP: 0";
+            lblOrgansExperience.Text = "EXP: 0";
+            lblRoundNumber.Text = "Round# 0";
+
+
+            // Optionally, reset any other variables or UI elements
+
+            // Show a message confirming the reset
+            MessageBox.Show("The game has been reset!");
         }
     }
 }

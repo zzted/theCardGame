@@ -44,13 +44,13 @@
             this.lbDeck.FormattingEnabled = true;
             this.lbDeck.Location = new System.Drawing.Point(12, 55);
             this.lbDeck.Name = "lbDeck";
-            this.lbDeck.Size = new System.Drawing.Size(320, 200);
+            this.lbDeck.Size = new System.Drawing.Size(450, 200);
             this.lbDeck.TabIndex = 2;
             this.lbDeck.SelectedIndexChanged += new System.EventHandler(this.lbDeck_SelectedIndexChanged);
 
             // Add Card to Head Button
             this.btnAddCardToHead = new System.Windows.Forms.Button();
-            this.btnAddCardToHead.Location = new System.Drawing.Point(364, 50);
+            this.btnAddCardToHead.Location = new System.Drawing.Point(490, 50);
             this.btnAddCardToHead.Name = "btnAddCardToHead";
             this.btnAddCardToHead.Size = new System.Drawing.Size(150, 40);
             this.btnAddCardToHead.TabIndex = 11;
@@ -60,7 +60,7 @@
 
             // Add Card to Arms Button
             this.btnAddCardToArms = new System.Windows.Forms.Button();
-            this.btnAddCardToArms.Location = new System.Drawing.Point(364, 95);
+            this.btnAddCardToArms.Location = new System.Drawing.Point(490, 95);
             this.btnAddCardToArms.Name = "btnAddCardToArms";
             this.btnAddCardToArms.Size = new System.Drawing.Size(150, 40);
             this.btnAddCardToArms.TabIndex = 12;
@@ -70,7 +70,7 @@
 
             // Add Card to Legs Button
             this.btnAddCardToLegs = new System.Windows.Forms.Button();
-            this.btnAddCardToLegs.Location = new System.Drawing.Point(364, 140);
+            this.btnAddCardToLegs.Location = new System.Drawing.Point(490, 140);
             this.btnAddCardToLegs.Name = "btnAddCardToLegs";
             this.btnAddCardToLegs.Size = new System.Drawing.Size(150, 40);
             this.btnAddCardToLegs.TabIndex = 13;
@@ -80,7 +80,7 @@
 
             // Add Card to Body Button
             this.btnAddCardToBody = new System.Windows.Forms.Button();
-            this.btnAddCardToBody.Location = new System.Drawing.Point(364, 185);
+            this.btnAddCardToBody.Location = new System.Drawing.Point(490, 185);
             this.btnAddCardToBody.Name = "btnAddCardToBody";
             this.btnAddCardToBody.Size = new System.Drawing.Size(150, 40);
             this.btnAddCardToBody.TabIndex = 14;
@@ -90,7 +90,7 @@
 
             // Add Card to Organs Button
             this.btnAddCardToOrgans = new System.Windows.Forms.Button();
-            this.btnAddCardToOrgans.Location = new System.Drawing.Point(364, 230);
+            this.btnAddCardToOrgans.Location = new System.Drawing.Point(490, 230);
             this.btnAddCardToOrgans.Name = "btnAddCardToOrgans";
             this.btnAddCardToOrgans.Size = new System.Drawing.Size(150, 40);
             this.btnAddCardToOrgans.TabIndex = 15;
@@ -155,7 +155,7 @@
             this.txtCardEffect.Location = new System.Drawing.Point(12, 270);
             this.txtCardEffect.Multiline = true;
             this.txtCardEffect.Name = "txtCardEffect";
-            this.txtCardEffect.Size = new System.Drawing.Size(272, 100);
+            this.txtCardEffect.Size = new System.Drawing.Size(450, 100);
             this.txtCardEffect.TabIndex = 22;
 
             // Save Effect Button
@@ -198,10 +198,68 @@
             this.lblOrgansEffect.Size = new System.Drawing.Size(120, 20);
             this.lblOrgansEffect.Text = "Organs:";
 
-            // Other controls (Experience, Rounds Played, etc.)
-            // ...
+            // Label for Head Experience
+            this.lblHeadExperience = new System.Windows.Forms.Label();
+            this.lblHeadExperience.Location = new System.Drawing.Point(12, 560); // Position it appropriately
+            this.lblHeadExperience.Name = "lblHeadExperience";
+            this.lblHeadExperience.Size = new System.Drawing.Size(120, 20); // Size for label
+            this.lblHeadExperience.Text = "EXP: 0"; // Default value
+            
 
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            // Repeat for other body parts (Arms, Legs, Body, Internal Organs)
+            this.lblArmsExperience = new System.Windows.Forms.Label();
+            this.lblArmsExperience.Location = new System.Drawing.Point(138, 560);
+            this.lblArmsExperience.Size = new System.Drawing.Size(120, 20);
+            this.lblArmsExperience.Text = "EXP: 0";
+            
+
+            this.lblLegsExperience = new System.Windows.Forms.Label();
+            this.lblLegsExperience.Location = new System.Drawing.Point(264, 560);
+            this.lblLegsExperience.Size = new System.Drawing.Size(120, 20);
+            this.lblLegsExperience.Text = "EXP: 0";
+            
+
+            this.lblBodyExperience = new System.Windows.Forms.Label();
+            this.lblBodyExperience.Location = new System.Drawing.Point(390, 560);
+            this.lblBodyExperience.Size = new System.Drawing.Size(120, 20);
+            this.lblBodyExperience.Text = "EXP: 0";
+            
+
+            this.lblOrgansExperience = new System.Windows.Forms.Label();
+            this.lblOrgansExperience.Location = new System.Drawing.Point(516, 560);
+            this.lblOrgansExperience.Size = new System.Drawing.Size(120, 20);
+            this.lblOrgansExperience.Text = "EXP: 0";
+
+            // Round number
+            this.lblRoundNumber = new System.Windows.Forms.Label();
+            this.lblRoundNumber.Location = new System.Drawing.Point(200, 610);
+            this.lblRoundNumber.Size = new System.Drawing.Size(120, 20);
+            this.lblRoundNumber.Text = "Round# 0";
+
+
+            // Add Button for End Round
+            this.btnEndRound = new System.Windows.Forms.Button();
+            this.btnEndRound.Location = new System.Drawing.Point(12, 600); // Position the button
+            this.btnEndRound.Name = "btnEndRound";
+            this.btnEndRound.Size = new System.Drawing.Size(150, 40); // Adjust the size
+            this.btnEndRound.TabIndex = 25;
+            this.btnEndRound.Text = "End Round";
+            this.btnEndRound.UseVisualStyleBackColor = true;
+            this.btnEndRound.Click += new System.EventHandler(this.btnEndRound_Click);
+
+            // Add Button for Reset Game
+            this.btnResetGame = new System.Windows.Forms.Button();
+            this.btnResetGame.Location = new System.Drawing.Point(490, 600);  // Position the button
+            this.btnResetGame.Name = "btnResetGame";
+            this.btnResetGame.Size = new System.Drawing.Size(150, 40); // Adjust size
+            this.btnResetGame.TabIndex = 26;
+            this.btnResetGame.Text = "Reset Game";
+            this.btnResetGame.UseVisualStyleBackColor = true;
+            this.btnResetGame.Click += new System.EventHandler(this.btnResetGame_Click);
+
+
+
+            this.ClientSize = new System.Drawing.Size(700, 700);
             this.Controls.Add(this.lbBodyPartHead);
             this.Controls.Add(this.lbBodyPartArms);
             this.Controls.Add(this.lbBodyPartLegs);
@@ -222,6 +280,14 @@
             this.Controls.Add(this.lblLegsEffect);
             this.Controls.Add(this.lblBodyEffect);
             this.Controls.Add(this.lblOrgansEffect);
+            this.Controls.Add(this.lblHeadExperience);
+            this.Controls.Add(this.lblArmsExperience);
+            this.Controls.Add(this.lblLegsExperience);
+            this.Controls.Add(this.lblBodyExperience);
+            this.Controls.Add(this.lblOrgansExperience);
+            this.Controls.Add(this.btnEndRound);
+            this.Controls.Add(this.lblRoundNumber);
+            this.Controls.Add(this.btnResetGame);
             this.Name = "MainForm";
             this.Text = "Card Game Demo";
             this.ResumeLayout(false);
@@ -252,5 +318,13 @@
         private System.Windows.Forms.Button btnAddCardToLegs;
         private System.Windows.Forms.Button btnAddCardToBody;
         private System.Windows.Forms.Button btnAddCardToOrgans;
+        private System.Windows.Forms.Button btnEndRound;
+        private System.Windows.Forms.Button btnResetGame;
+        private System.Windows.Forms.Label lblHeadExperience;
+        private System.Windows.Forms.Label lblArmsExperience;
+        private System.Windows.Forms.Label lblLegsExperience;
+        private System.Windows.Forms.Label lblBodyExperience;
+        private System.Windows.Forms.Label lblOrgansExperience;
+        private System.Windows.Forms.Label lblRoundNumber;
     }
 }
